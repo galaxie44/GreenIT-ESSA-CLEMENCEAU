@@ -93,10 +93,59 @@ class AdminArticleController extends Controller
         $destination = public_path('image');
         $file->move($destination, $filename);
 
-        $prefixed = $destination . DIRECTORY_SEPARATOR . 'M' . $filename;
-        @copy($destination . DIRECTORY_SEPARATOR . $filename, $prefixed);
+        $this->compressToPrefixed($destination, $filename);
 
         return $filename;
+    }
+
+    private function compressToPrefixed(string $destination, string $filename): void
+    {
+        $sourcePath = $destination . DIRECTORY_SEPARATOR . $filename;
+        $targetPath = $destination . DIRECTORY_SEPARATOR . 'M' . $filename;
+
+        $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+        switch ($extension) {
+            case 'jpg':
+            case 'jpeg':
+                $img = @imagecreatefromjpeg($sourcePath);
+                break;
+            case 'png':
+                $img = @imagecreatefrompng($sourcePath);
+                break;
+            case 'gif':
+                $img = @imagecreatefromgif($sourcePath);
+                break;
+            case 'webp':
+                $img = @imagecreatefromwebp($sourcePath);
+                break;
+            default:
+                $img = null;
+        }
+
+        if ($img === false || $img === null) {
+            @copy($sourcePath, $targetPath);
+            return;
+        }
+
+        // Vignette plus petite et plus compressée pour un rendu moins net
+        $maxWidth = 400;
+        $maxHeight = 400;
+        $width = imagesx($img);
+        $height = imagesy($img);
+
+        $ratio = min($maxWidth / $width, $maxHeight / $height, 1);
+        $newWidth = (int)($width * $ratio);
+        $newHeight = (int)($height * $ratio);
+
+        $resized = imagecreatetruecolor($newWidth, $newHeight);
+        imagecopyresampled($resized, $img, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+        // Compression très forte (qualité 5)
+        imagejpeg($resized, $targetPath, 5);
+
+        imagedestroy($resized);
+        imagedestroy($img);
     }
 }
 

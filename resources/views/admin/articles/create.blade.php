@@ -4,17 +4,17 @@
     <div class="container mt-4">
         <form action="{{ route('admin.articles.store') }}" method="post" enctype="multipart/form-data">
             @csrf
-            <p>titre de l'article</p>
+            <p>Titre de l'article</p>
             <input type="text" name="titre" id="titre">
-            <p>descriptioion</p>
+            <p>Description</p>
             <input type="text" name="descriptioion" id="descriptioion">
-            <p>prix </p>
+            <p>Prix</p>
             <input type="number" name="prix" id="prix">
-            <p>image</p>
+            <p>Image</p>
             <input type="file" name="image" id="image">
-            <p>Quantitee</p>
+            <p>Quantité</p>
             <input type="number" name="quantitee" id="quantitee"><br><br>
-            <input type="submit" value="envoier" name="submit">
+            <input type="submit" value="Envoyer" name="submit">
         </form>
     </div>
 @endsection

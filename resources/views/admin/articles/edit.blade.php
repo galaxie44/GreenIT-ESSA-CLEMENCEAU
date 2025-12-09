@@ -5,7 +5,7 @@
         <form action="{{ route('admin.articles.update', $article->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <p>Id Article *</p>
+            <p>ID article *</p>
             <input type="text" name="idArticle" id="idArticle" value="{{ $article->id }}" readonly>
             <p>Titre de l'article *</p>
             <input type="text" name="titre" id="titre" value="{{ $article->titre }}">
@@ -15,10 +15,10 @@
             <input type="number" name="prix" id="prix" value="{{ $article->prix }}">
             <p>Image</p>
             <input type="file" name="image" id="image">
-            <p>Quantitee *</p>
+            <p>Quantité *</p>
             <input type="text" name="Quantitee" id="Quantitee" value="{{ $article->qteStocks }}">
-            <input type="submit" value="envoier" name="submit">
-            <p> * obligatoire</p>
+            <input type="submit" value="Envoyer" name="submit">
+            <p>* obligatoire</p>
         </form>
     </div>
 @endsection

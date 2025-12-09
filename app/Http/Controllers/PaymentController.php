@@ -34,10 +34,10 @@ class PaymentController extends Controller
                 Article::where('id', $articleId)->decrement('qteStocks', $qty);
             }
             session()->forget('panier');
-            return back()->with('success', 'merci de votre achat');
+            return back()->with('success', 'Merci de votre achat');
         }
 
-        return back()->withErrors(['payment' => 'pas ok veuiller ressayer']);
+        return back()->withErrors(['payment' => 'Paiement refusé, veuillez réessayer']);
     }
 }
 

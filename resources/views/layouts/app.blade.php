@@ -19,17 +19,17 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{ route('cart.show') }}">panier</a>
+                        <a class="nav-link" aria-current="page" href="{{ route('cart.show') }}">Panier</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.login') }}">loginadmine</a>
+                        <a class="nav-link" href="{{ route('admin.login') }}">Login admin</a>
                     </li>
                     @if(session('admin'))
                         <li id="ajouarticle" class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.articles.create') }}">ajouter un Article</a>
+                            <a class="nav-link" href="{{ route('admin.articles.create') }}">Ajouter un article</a>
                         </li>
                         <li id="editArticle" class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.articles.index') }}">Edit un Article</a>
+                            <a class="nav-link" href="{{ route('admin.articles.index') }}">Éditer un article</a>
                         </li>
                     @endif
                 </ul>
